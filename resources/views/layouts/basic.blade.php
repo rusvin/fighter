@@ -42,9 +42,18 @@
                 <li><a href="#">Фото</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a data-toggle="modal" data-target="#loginModal" href="#">
-                        <span class="glyphicon glyphicon-log-in"></span> Login
-                    </a></li>
+                <li>
+                    <a data-toggle="modal" data-target="#loginModal" href="#">
+                        <span class="glyphicon glyphicon-log-in"></span>
+                        Login
+                    </a>
+                </li>
+                <li>
+                    <a data-toggle="modal" data-target="#registerModal" href="#">
+                        <span class="glyphicon glyphicon-user"></span>
+                        Sign Up
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
@@ -111,13 +120,23 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <br>
                 <br>
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10 text-center">
+                        <img src="/images/login-img.png">
+                    </div>
+                </div>
+                <br>
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="form-group row">
-                        <label for="email" class="col-sm-3 col-form-label text-md-right">Email</label>
+                        {{--<label for="email" class="col-sm-3 col-form-label text-md-right">Email</label>--}}
 
-                        <div class="col-md-9">
-                            <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                            <input id="email" type="email"
+                                   class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
+                                   placeholder="Email" name="email" value="{{ old('email') }}" required autofocus>
 
                             @if ($errors->has('email'))
                                 <span class="invalid-feedback">
@@ -128,10 +147,13 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="password" class="col-md-3 col-form-label text-md-right">Пароль</label>
+                        {{--<label for="password" class="col-md-3 col-form-label text-md-right">Пароль</label>--}}
+                        <div class="col-md-1"></div>
 
-                        <div class="col-md-9">
-                            <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+                        <div class="col-md-10">
+                            <input id="password" type="password"
+                                   class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
+                                   placeholder="Пароль" name="password" required>
 
                             @if ($errors->has('password'))
                                 <span class="invalid-feedback">
@@ -142,30 +164,30 @@
                     </div>
 
                     {{--<div class="form-group row">--}}
-                        {{--<div class="col-md-12 text-center">--}}
-                            {{--<div class="checkbox">--}}
-                                {{--<label>--}}
-                                    {{--<input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Запам'ятати мене--}}
-                                {{--</label>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
+                    {{--<div class="col-md-12 text-center">--}}
+                    {{--<div class="checkbox">--}}
+                    {{--<label>--}}
+                    {{--<input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Запам'ятати мене--}}
+                    {{--</label>--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
                     {{--</div>--}}
 
                     <div class="form-group row">
-                        <div class="col-md-4"></div>
-                        <div class="col-md-4">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
                             <button type="submit" class="btn btn-info btn-block">
-                                Вхід
+                               <b> ВХІД </b>
                             </button>
-                            </div>
-                        <div class="col-md-4"></div>
+                        </div>
+                        <div class="col-md-3"></div>
                     </div>
                     <div class="form-group row">
-                    <div class="col-md-12 text-center">
-                        <a class="btn btn-link" href="{{ route('password.request') }}">
-                            <b>Забули пароль?</b>
-                        </a>
-                    </div>
+                        <div class="col-md-12 text-center">
+                            <a class="btn btn-link" href="{{ route('password.request') }}">
+                                <b>Забули пароль?</b>
+                            </a>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -173,6 +195,91 @@
     </div>
 </div>
 <!-- End Login Modal -->
+
+<!-- Register Modal -->
+<div class="modal fade" id="registerModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <br>
+                <br>
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10 text-center">
+                        <img class="img-responsive"  src="/images/registration-img.png">
+                    </div>
+                </div>
+                <br>
+                <form method="POST" action="{{ route('register') }}">
+                    @csrf
+                    <div class="form-group row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                            <input id="email" type="text"
+                                   class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}"
+                                   placeholder="Ім'я" name="name" value="{{ old('name') }}" required autofocus>
+
+                            @if ($errors->has('name'))
+                                <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                            <input id="email" type="email"
+                                   class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
+                                   placeholder="Email" name="email" value="{{ old('email') }}" required autofocus>
+
+                            @if ($errors->has('email'))
+                                <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-1"></div>
+
+                        <div class="col-md-10">
+                            <input id="password" type="password"
+                                   class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
+                                   placeholder="Пароль" name="password" required>
+
+                            @if ($errors->has('password'))
+                                <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-1"></div>
+
+                        <div class="col-md-10">
+                            <input id="password" type="password" class="form-control"
+                                   placeholder="Повторіть пароль" name="password_confirmation" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                            <button type="submit" class="btn btn-info btn-block">
+                                <b>ПРИЄДНАТИСЯ</b>
+                            </button>
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Register Modal -->
 
 
 <footer class="container-fluid text-center">

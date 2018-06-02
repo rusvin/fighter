@@ -14,5 +14,6 @@ Route::prefix('cabinet')->group(function () {
         //user
         Route::resource('user', 'UserController');
         Route::post('/user/update-password', 'UserController@updatePassword')->name('user.update-password');
+        Route::post('/user/update-avatar', 'UserController@updateAvatar')->name('user.update-avatar');
     });
 });

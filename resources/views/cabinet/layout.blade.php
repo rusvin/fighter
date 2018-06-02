@@ -516,6 +516,7 @@
 <!-- Toastr -->
 <script src="{{url('/')}}/js/plugins/toastr/toastr.min.js"></script>
 <script src="{{url('/')}}/js/plugins/fenqyuanchen-cropper/cropper.js"></script>
+<script src="{{url('/')}}/js/plugins/inputmask/jasny-bootstrap.js"></script>
 
 @yield('scripts')
 </body>

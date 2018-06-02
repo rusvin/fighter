@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Gate;
 use Carbon\Carbon;
 use App\Http\Requests\UpdateProfile;
 use App\Http\Requests\UserUpdatePassword;
+use App\Http\Requests\UserUpdateAvatar;
 use Mews\Purifier\Facades\Purifier;
 
 class UserController extends Controller

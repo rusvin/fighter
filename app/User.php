@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
+use App\Traits\FileSystem;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -35,5 +36,13 @@ class User extends Authenticatable
     public static function userUpdatePassword($data)
     {
         return self::whereId(auth()->user()->id)->update(['password' => bcrypt($data['password'])]);
+    }
+
+    public static function userUpdateAvatar($data)
+    {
+            $image = FileSystem::makeImageFromBase64($data['avatar']);
+            $avatar = FileSystem::updateImage($image, 'images.users', auth()->user()->avatar);
+
+            return User::whereId(auth()->user()->id)->update(['avatar' => $avatar]);
     }
 }

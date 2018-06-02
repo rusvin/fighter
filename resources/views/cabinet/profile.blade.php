@@ -59,9 +59,14 @@
 
         <div class="row m-b-lg m-t-lg">
             <div class="col-md-8">
+                <form id="hidden_form" method="POST" enctype="multipart/form-data" action="{{route('user.update-avatar')}}">
+                    {{ csrf_field() }}
+                    <input id="hidden_photo" name="avatar" type="hidden">
+                </form>
 
                 <div class="profile-image">
-                    <img id="avatar" src="{{url('/')}}/img/a4.jpg" class="img-circle circle-border m-b-md"
+                    <img id="avatar" src="{{($user->avatar) ? asset(config('images.users.small.public_path') . $user->avatar):asset(config('images.default_avatar')) }}" alt="avatar"
+                         class="img-circle circle-border m-b-md"
                          alt="profile">
                     <label>
                         <div class="select-inner">
@@ -127,7 +132,6 @@
                     <div class="ibox-title">
                         <h5>Редагувати профіль</h5>
                     </div>
-                    {{dump($errors)}}
                     <div class="ibox-content">
                         <form method="POST" class="form-horizontal" enctype="multipart/form-data"
                               action="{{route('user.update', auth()->user()->id)}}">
@@ -136,7 +140,7 @@
                             <div class="form-group {{$errors->has('email') ? 'has-error' : ''}}">
                                 <label class="col-sm-2 control-label">Email</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="email" class="form-control"
+                                    <input type="text" name="email" class="form-control" autocomplete="off"
                                            value="{{old('email')?old('email'):$user->email}}">
                                     @if($errors->has('email'))
                                         <span class="help-block m-b-none">{{$errors->first('email')}}</span>
@@ -146,8 +150,9 @@
                             <div class="form-group {{$errors->has('phone') ? 'has-error' : ''}}">
                                 <label class="col-sm-2 control-label">Телефон</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="phone" class="form-control"
-                                           value="{{old('phone')?old('phone'):$user->phone}}">
+                                    <input type="text" name="phone" class="form-control" autocomplete="off"
+                                           value="{{old('phone')?old('phone'):$user->phone}}"
+                                           data-mask="+380999999999">
                                     @if($errors->has('phone'))
                                         <span class="help-block m-b-none">{{$errors->first('phone')}}</span>
                                     @endif
@@ -156,7 +161,7 @@
                             <div class="form-group {{$errors->has('nickname') ? 'has-error' : ''}}">
                                 <label class="col-sm-2 control-label">Нікнейм</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="nickname" class="form-control"
+                                    <input type="text" name="nickname" class="form-control" autocomplete="off"
                                            value="{{old('nickname')?old('nickname'):$user->nickname}}">
                                     @if($errors->has('nickname'))
                                         <span class="help-block m-b-none">{{$errors->first('nickname')}}</span>
@@ -166,8 +171,10 @@
                             <div class="form-group {{$errors->has('birthday') ? 'has-error' : ''}}">
                                 <label class="col-sm-2 control-label">Дата народження</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="birthday" class="form-control"
-                                           value="{{old('birthday')?old('birthday'):$user->birthday}}">
+                                    <input type="text" name="birthday" class="form-control" autocomplete="off"
+                                           value="{{old('birthday')?old('birthday'):$user->birthday}}"
+                                           data-mask="9999-99-99"
+                                    >
                                     @if($errors->has('birthday'))
                                         <span class="help-block m-b-none">{{$errors->first('birthday')}}</span>
                                     @endif
@@ -277,6 +284,7 @@
                     };
                     @if(session()->get('fields') == 'profile')toastr.success('Ви успішно оновили свій профіль', 'Чудово!');@endif
                     @if(session()->get('fields') == 'password')toastr.success('Ви успішно змінили пароль', 'Чудово!');@endif
+                    @if(session()->get('fields') == 'avatar')toastr.success('Ви успішно змінили фото профілю', 'Чудово!');@endif
                 }, 1300);
             });
         </script>
@@ -352,7 +360,7 @@
                         maxHeight: max_size
                     });
                     avatar.src = canvas.toDataURL();
-                    $('#hidden_photo').attr('value', avatar.src);
+                    $('#hidden_photo').attr('value', avatar.src).closest('form').submit();
                 }
             });
         });

@@ -1,4 +1,4 @@
-@extends('cabinet.layout')
+@extends('cabinet.layouts.main')
 
 @section('title')
     Профіль

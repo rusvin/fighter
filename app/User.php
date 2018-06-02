@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'birthday', 'email', 'password', 'avatar', 'phone', 'nickname'
     ];
 
     /**
@@ -26,4 +26,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public static function userUpdateProfile($data)
+    {
+        return self::whereId(auth()->user()->id)->update($data);
+    }
+
+    public static function userUpdatePassword($data)
+    {
+        return self::whereId(auth()->user()->id)->update(['password' => bcrypt($data['password'])]);
+    }
 }

@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder
             [
                 'name' => 'Василь',
                 'nickname' => 'Super-V',
-                'last_name' => 'Василевич',
+                'last_name' => 'Столотенісов',
                 'birthday' => '1990-10-10',
                 'email' => 'user@user.com',
                 'password' => bcrypt('111111'),

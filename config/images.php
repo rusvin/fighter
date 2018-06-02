@@ -22,5 +22,5 @@ return [
     ],
 
     'avatar_img_format' => 'jpg',
-    'default_avatar' => 'storage/users/avatars/default-avatar.png'
+    'default_avatar' => 'images/default_avatar.png'
 ];

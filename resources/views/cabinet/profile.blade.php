@@ -58,14 +58,17 @@
 
 
         <div class="row m-b-lg m-t-lg">
-            <div class="col-md-8">
-                <form id="hidden_form" method="POST" enctype="multipart/form-data" action="{{route('user.update-avatar')}}">
+            <div class="col-md-6">
+                <form id="hidden_form" method="POST" enctype="multipart/form-data"
+                      action="{{route('user.update-avatar')}}">
                     {{ csrf_field() }}
                     <input id="hidden_photo" name="avatar" type="hidden">
                 </form>
 
                 <div class="profile-image">
-                    <img id="avatar" src="{{($user->avatar) ? asset(config('images.users.small.public_path') . $user->avatar):asset(config('images.default_avatar')) }}" alt="avatar"
+                    <img id="avatar"
+                         src="{{($user->avatar) ? asset(config('images.users.small.public_path') . $user->avatar):asset(config('images.default_avatar')) }}"
+                         alt="avatar"
                          class="img-circle circle-border m-b-md"
                          alt="profile">
                     <label>
@@ -81,42 +84,60 @@
                             <h2 class="no-margins">
                                 {{$user->name}} {{$user->last_name}}
                             </h2>
-                            <h4>Founder of Groupeq</h4>
-                            <small>
-                                There are many variations of passages of Lorem Ipsum available, but the majority
-                                have suffered alteration in some form Ipsum available.
-                            </small>
+                            <h4>{{$user->email}}</h4>
+                            {{--<small>--}}
+                            {{--There are many variations of passages of Lorem Ipsum available, but the majority--}}
+                            {{--have suffered alteration in some form Ipsum available.--}}
+                            {{--</small>--}}
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <table class="table small m-b-xs">
                     <tbody>
                     <tr>
                         <td>
-                            <strong>142</strong> Зіграно ігор
+                            Найвище місце
                         </td>
                         <td>
-                            <strong>22</strong> Зіграно цьогоріч
+                            <span class="label label-danger">23</span>
+                        </td>
+                        <td>
+                            Поточне місце
+                        </td>
+                        <td>
+                            <span class="label label-danger">23</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Найвищий рейтинг
+                        </td>
+                        <td>
+                            <span class="label label-warning">23</span>
+                        </td>
+                        <td>
+                            Поточний рейтинг
+                        </td>
+                        <td>
+                            <span class="label label-warning">23</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Зіграно ігор
+                        </td>
+                        <td>
+                            <span class="label label-info">23</span>
+                        </td>
+                        <td>
+                            Зіграно цьогоріч
+                        </td>
+                        <td>
+                            <span class="label label-info">23</span>
                         </td>
 
-                    </tr>
-                    <tr>
-                        <td>
-                            <strong>12</strong> Найвище місце
-                        </td>
-                        <td>
-                            <strong>16</strong> Поточне місце
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <strong>154</strong> Найвищий рейтинг
-                        </td>
-                        <td>
-                            <strong>32</strong> Поточний рейтинг
-                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -236,30 +257,34 @@
     </div>
 
     <div class="cropper-modal modal fade" id="modal" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="col-md-12">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title text-center" id="modalLabel"><b>Выбор фото</b></h4>
+                    <br>
+                    <h4 class="modal-title text-center" id="modalLabel"><b>ВИБІР ФОТО</b></h4>
+                    <br>
                 </div>
                 <div class="modal-body">
                     <div class="img-container">
-                        <img id="image" src="">
+                        <img id="image" style="max-height: calc(100vh - 225px);" src="">
                     </div>
                     <br>
                     <div class="load-image text-center">
                         <label>
-                            <span id="zoomIn" class="btn btn-info"><i class="fa fa-search-plus"></i></span>
-                            <span id="rotate" class="btn btn-info"><i class="fa fa-rotate-right"></i></span>
-                            <span id="zoomOut" class="btn btn-info"><i class="fa fa-search-minus"></i></span>
-                            <br>
+                            <button id="zoomIn" class="btn btn-info dim"><i class="fa fa-search-plus"></i></button>
+                            <button id="rotate" class="btn btn-info dim"><i class="fa fa-rotate-right"></i></button>
+                            <button id="zoomOut" class="btn btn-info dim"><i class="fa fa-search-minus"></i></button>
                             <br>
                             <div class="btn-group">
-                                <span id="crop" class="btn btn-warning" style="border-radius: 15px 0px 0px 15px">Сохранить</span>
-                                <span id="reload" class="btn btn-primary" style="border-radius: 0px 15px 15px 0px"
-                                      data-dismiss="modal">Другое фото</span>
+                                <button id="crop" class="btn btn-warning dim" style="border-radius: 15px 0px 0px 15px">
+                                    ЗБЕРЕГТИ
+                                </button>
+                                <button id="reload" class="btn btn-primary dim" style="border-radius: 0px 15px 15px 0px"
+                                        data-dismiss="modal">ІНШЕ ФОТО
+                                </button>
                             </div>
 
                         </label>
@@ -282,9 +307,11 @@
                         showMethod: 'slideDown',
                         timeOut: 4000
                     };
-                    @if(session()->get('fields') == 'profile')toastr.success('Ви успішно оновили свій профіль', 'Чудово!');@endif
-                    @if(session()->get('fields') == 'password')toastr.success('Ви успішно змінили пароль', 'Чудово!');@endif
-                    @if(session()->get('fields') == 'avatar')toastr.success('Ви успішно змінили фото профілю', 'Чудово!');@endif
+                    @if(session()->get('fields') == 'profile')toastr.success('Ви успішно оновили свій профіль', 'Чудово!');
+                    @endif
+                                        @if(session()->get('fields') == 'password')toastr.success('Ви успішно змінили пароль', 'Чудово!');
+                    @endif
+                                        @if(session()->get('fields') == 'avatar')toastr.success('Ви успішно змінили фото профілю', 'Чудово!');@endif
                 }, 1300);
             });
         </script>

@@ -25,11 +25,10 @@ class UpdateProfile extends FormRequest
     public function rules(Request $request)
     {
             return [
-                'nickname' => 'max:10|min:2',
+                'nickname' => 'nullable|max:10|min:2',
                 'email' => 'required|email',
                 'birthday' => 'required|date',
-                'phone' => 'regex:/^\+380\d{3}\d{2}\d{2}\d{2}$/',
-                'avatar' => '',
+                'phone' => 'nullable|regex:/^\+380\d{3}\d{2}\d{2}\d{2}$/',
             ];
     }
 
@@ -40,7 +39,6 @@ class UpdateProfile extends FormRequest
             'birthday' => 'дата народження',
             'avatar' => 'аватар',
             'phone' => 'телефон',
-            'email' => 'email',
         ];
     }
     public function messages()

@@ -28,6 +28,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function role()
+    {
+        return $this->belongsTo('App\UserRole');
+    }
+
     public static function userUpdateProfile($data)
     {
         return self::whereId(auth()->user()->id)->update($data);

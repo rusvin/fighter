@@ -17,6 +17,12 @@
             <li class="active">
                 <a href="layouts.html"><i class="fa fa-user"></i> <span class="nav-label">ПРОФІЛЬ</span></a>
             </li>
+            @if(Gate::allows('admin'))
+            <li>
+                <a href="layouts.html"><i class="fa fa-plus"></i> <span class="nav-label">Додати гру
+                        <span class="pull-right text-danger"><b>A</b></span></span></a>
+            </li>
+            @endif
             <li>
                 <a href="layouts.html"><i class="fa fa-diamond"></i> <span class="nav-label">КАТАЛОГ ІГОР</span></a>
             </li>

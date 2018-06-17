@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder
             [
                 'name' => 'Василь',
                 'nickname' => 'Super-V',
-                'role_id' => '2',
+                'role_id' => '1',
                 'last_name' => 'Столотенісов',
                 'birthday' => '1990-10-10',
                 'email' => 'user@user.com',
@@ -27,7 +27,7 @@ class UsersTableSeeder extends Seeder
             [
                 'name' => 'Адмін',
                 'nickname' => 'Admin-Z',
-                'role_id' => '1',
+                'role_id' => '2',
                 'last_name' => 'Адмінов',
                 'birthday' => '1990-10-10',
                 'email' => 'admin@admin.com',

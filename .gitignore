@@ -1,5 +1,6 @@
 /node_modules
 /public/hot
+/public/cabinet
 /public/storage
 /public/assets/*
 /resources/assets/frontend/fonts/*

@@ -47,4 +47,6 @@ mix.scripts([
     'resources/assets/cabinet/js/lib/toastr/toastr.min.js',
     'resources/assets/cabinet/js/lib/fenqyuanchen-cropper/cropper.js',
     'resources/assets/cabinet/js/lib/inputmask/jasny-bootstrap.js',
-], 'public/cabinet/js/cabinet.js').version();
+], 'public/cabinet/js/cabinet.js')
+  //  .mix.copy('resources/assets/cabinet/js/app/profile.js', 'public/cabinet/js/profile.js')
+    .version();

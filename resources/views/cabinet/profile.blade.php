@@ -296,9 +296,9 @@
     </div>
 @endsection
 @section('scripts')
-
+    <script>
     @if(session()->has('status'))
-        <script>
+
             $(document).ready(function () {
                 setTimeout(function () {
                     toastr.options = {
@@ -314,10 +314,10 @@
                                         @if(session()->get('fields') == 'avatar')toastr.success('Ви успішно змінили фото профілю', 'Чудово!');@endif
                 }, 1300);
             });
-        </script>
+
     @endif
 
-    <script>
+
         window.addEventListener('DOMContentLoaded', function () {
             var avatar = document.getElementById('avatar');
             var image = document.getElementById('image');

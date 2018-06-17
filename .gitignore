@@ -1,6 +1,7 @@
 /node_modules
 /public/hot
 /public/cabinet
+/public/mix-manifest.json
 /public/storage
 /public/assets/*
 /resources/assets/frontend/fonts/*
